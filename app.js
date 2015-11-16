@@ -9,9 +9,35 @@ var express = require('express'),
   http = require('http'),
   path = require('path'),
   io = require('socket.io-client'),
-  os = require('os');
+  os = require('os'),
+  redis = require('redis'),
+  nodemailer = require('nodemailer');
 
 var app = express();
+var alert_flag = 0
+
+
+if(app.get('port') == '3000')
+  name = 'production'
+else
+  name = 'canary'
+
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: process.argv[3],
+        pass: process.argv[4]
+    }
+});
+
+var mailOptions = {
+    from: process.argv[3], // sender address 
+    to: 'rsmandao@ncsu.edu', // list of receivers 
+    subject: 'Alert from '+name, // Subject line 
+    text: 'CPU overload!', // plaintext body 
+    html: '<b>Check the release ✔</b>' // html body 
+};
+
 
 app.configure(function(){
   app.set('port', process.env.PORT || process.argv[2]);
@@ -62,11 +88,6 @@ app.get('/contact', function(req, res){
     title: 'Contact'
   });
 });
-
-if(app.get('port') == '3000')
-  name = 'stable'
-else
-  name = 'canary'
 
 var socket = io.connect('http://127.0.0.1:4000');
 socket.on('connect', function () { 
@@ -126,6 +147,20 @@ function cpuAverage()
   avg_cpu_usage = ((totalDifference - idleDifference) / totalDifference) * 100;
   //Calculate the average percentage CPU usage
   console.log(avg_cpu_usage)
+  if(avg_cpu_usage > 5)
+  {
+    if(alert_flag == 0)
+    {
+      console.log("SEND")
+      transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+      });
+      alert_flag = 1
+    }
+  }
   return avg_cpu_usage;
 }
 
