@@ -1,3 +1,3 @@
 #!/bin/bash
 
-node app.js 5000
+echo 'RAVINA DA MAN'
