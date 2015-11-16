@@ -48,12 +48,12 @@ app.configure('development', function(){
     title: 'Home'
   })
 });*/
-if(app.get('port') == '3000')
+if(app.get('port') == '5000')
   var message = 'Production! (Stable)'
 else
   var message = 'Canary'
 
-if(app.get('port') == '3000')
+if(app.get('port') == '5000')
   name = 'production'
 else
   name = 'canary'
