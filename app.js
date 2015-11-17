@@ -16,8 +16,8 @@ var express = require('express'),
 var redis = require('redis');
 var client = redis.createClient(6379, '127.0.0.1', {});
 
-/*var node = process.argv[2];
-console.log("This is Server:", node);*/
+var node = process.argv[2];
+console.log("This is Server:", node);
 
 var app = express();
 var alert_flag = 0
