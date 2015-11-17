@@ -17,3 +17,4 @@ client.hmset('Canary', {
 });
 
 console.log("Values set in REDIS store.");
+client.quit();
