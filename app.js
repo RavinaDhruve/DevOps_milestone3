@@ -14,7 +14,7 @@ var express = require('express'),
   nodemailer = require('nodemailer');
 
 var redis = require('redis');
-var client = redis.createClient(6379, 'localhost', {});
+var client = redis.createClient(6379, '192.241.175.40', {});
 
 var node = process.argv[2];
 console.log("This is Server:", node);
