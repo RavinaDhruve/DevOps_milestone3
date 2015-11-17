@@ -13,6 +13,12 @@ var express = require('express'),
   redis = require('redis'),
   nodemailer = require('nodemailer');
 
+var redis = require('redis');
+var client = redis.createClient(6379, '192.241.175.40', {});
+
+var node = process.argv[2];
+console.log("This is Server:", node);
+
 var app = express();
 var alert_flag = 0
 
@@ -66,10 +72,20 @@ var mailOptions = {
     html: '<b>Check the release ✔</b>' // html body 
 };
 
-app.get('/',function(req, res) { 
-  res.writeHead(200, {'content-type':'text/html'});
-    res.write(message);
-});
+client.hmget(node, '/', function(err,value){ 
+
+  var flag = (value.toString());
+  if(flag === 'True') {
+
+    app.get('/',function(req, res) { 
+      res.writeHead(200, {'content-type':'text/html'});
+        res.write(message);
+    });
+  } // end of flag checking
+
+  //console.log("\nFeature Flag off. No service found!");
+  
+}); // end of redis check function
 
 app.get('/home',function(req, res) {
   res.render('index', {
@@ -77,17 +93,27 @@ app.get('/home',function(req, res) {
   });
 });
 
-app.get('/about', function(req, res){
-  res.render('about', {
-    title: 'About'
-  });
-});
+client.hmget(node, '/about', function(err,value){ 
+
+  var flag = (value.toString());
+  if(flag === 'True') {
+    app.get('/about', function(req, res){
+      res.render('about', {
+        title: 'About'
+      });
+    });
+  } // end of flag checking
+
+  //console.log("\nFeature Flag off. No service found!");
+  
+}); // end of redis check function 
 
 app.get('/contact', function(req, res){
   res.render('contact', {
     title: 'Contact'
   });
 });
+
 
 var socket = io.connect('http://127.0.0.1:4000');
 socket.on('connect', function () { 
