@@ -18,7 +18,7 @@ setInterval(function()
       console.log(out);
       var stats = out.split('\n');
         console.log(typeof(stats[1]));
-        if(parseInt(stats[1])>7)
+        if(parseInt(stats[1])>2)
         {
                 var mailOptions = {
                     from: process.argv[2], // sender address
