@@ -31,9 +31,11 @@ var proxy   = httpProxy.createProxyServer(options);
 
 var server  = http.createServer(function(req, res)
 {
-    client.rpoplpush('hosts','hosts',function(err,value) {
+    client.rpop('hosts',function(err,value) {
         proxy.web( req, res, {target: value } );
-        console.log("VALUE rpoplpush: ",value)
+        client.lpush(['hosts', value], function(err, value){
+            console.log('pushed value: '+value+' again to queue');
+        })
     })
 });
 server.listen(8000);
@@ -98,7 +100,7 @@ setInterval(function()
         var memoryLoad = parseInt(stats[1]);
         console.log(memoryLoad)
         var name = 'canary';
-        if(memoryLoad>1)
+        if(memoryLoad>3)
         {
                 var mailOptions = {
                     from: process.argv[2], // sender address
