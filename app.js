@@ -69,7 +69,9 @@ client.hmget(node, '/', function(err,value){
   if(flag === 'True') {
 
     app.get('/',function(req, res) { 
-      res.send('hello user!<br> from host Canary');
+      res.writeHead(200, {'content-type':'text/html'});
+        res.write(message);
+        res.end();
     });
   } // end of flag checking
 
