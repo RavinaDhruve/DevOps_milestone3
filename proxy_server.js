@@ -31,7 +31,7 @@ var server  = http.createServer(function(req, res)
 		console.log("VALUE rpoplpush: ",value)
 	})
 });
-server.listen(8080);
+server.listen(8000);
 
 var monitoring_server = app.listen(4000, function () {
 

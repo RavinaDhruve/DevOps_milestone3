@@ -23,15 +23,6 @@ var app = express();
 var alert_flag = 0
 
 
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: process.argv[3],
-        pass: process.argv[4]
-    }
-});
-
-
 app.configure(function(){
   app.set('port', process.env.PORT || 5000);
   app.set('views', __dirname + '/views');
@@ -64,13 +55,7 @@ if(app.get('port') == '5000')
 else
   name = 'canary'
 
-var mailOptions = {
-    from: process.argv[3], // sender address 
-    to: 'rsmandao@ncsu.edu', // list of receivers 
-    subject: 'Alert from '+name, // Subject line 
-    text: 'CPU overload!', // plaintext body 
-    html: '<b>Check the release ✔</b>' // html body 
-};
+
 
 client.hmget(node, '/', function(err,value){ 
 
@@ -114,81 +99,6 @@ app.get('/contact', function(req, res){
   });
 });
 
-
-var socket = io.connect('http://127.0.0.1:4000');
-socket.on('connect', function () { 
-  console.log("socket connected"); 
-  setInterval(function() 
-  {
-    socket.emit('heartbeat',
-    {
-      Name: name, cpu: cpuAverage(), memoryLoad: memoryLoad(),
-    });
-  },2000);
-});
-
-function memoryLoad()
-{
-  console.log( os.totalmem(), os.freemem() );
-  var mem_used = (os.totalmem() - os.freemem())/os.totalmem();
-  console.log(mem_used * 100);
-  mem_used = mem_used*100;
-  return mem_used;
-}
-
-function cpuTicksAcrossCores() 
-{
-  //Initialise sum of idle and time of cores and fetch CPU info
-  var totalIdle = 0, totalTick = 0;
-  var cpus = os.cpus();
- 
-  //Loop through CPU cores
-  for(var i = 0, len = cpus.length; i < len; i++) 
-  {
-    //Select CPU core
-    var cpu = cpus[i];
-    //Total up the time in the cores tick
-    for(type in cpu.times) 
-    {
-      totalTick += cpu.times[type];
-    }     
-    //Total up the idle time of the core
-    totalIdle += cpu.times.idle;
-  }
- 
-  //Return the average Idle and Tick times
-  return {idle: totalIdle / cpus.length,  total: totalTick / cpus.length};
-}
-
-var startMeasure = cpuTicksAcrossCores();
-
-function cpuAverage()
-{
-  var endMeasure = cpuTicksAcrossCores(); 
- 
-  //Calculate the difference in idle and total time between the measures
-  var idleDifference = endMeasure.idle - startMeasure.idle;
-  var totalDifference = endMeasure.total - startMeasure.total;
- 
-  avg_cpu_usage = ((totalDifference - idleDifference) / totalDifference) * 100;
-  //Calculate the average percentage CPU usage
-  console.log(avg_cpu_usage)
-  if(avg_cpu_usage > 5)
-  {
-    if(alert_flag == 0)
-    {
-      console.log("SEND")
-      transporter.sendMail(mailOptions, function(error, info){
-        if(error){
-            return console.log(error);
-        }
-        console.log('Message sent: ' + info.response);
-      });
-      alert_flag = 1
-    }
-  }
-  return avg_cpu_usage;
-}
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
