@@ -73,7 +73,12 @@ client.hmget(node, '/', function(err,value){
         res.write(message);
         res.end();
         */
-        res.send('hello user!<br> from host Canary: '+req.client.server._connectionKey.slice(7,11))
+        var a = 2000
+        while(1)
+        { 
+          a = Math.sin(a) * Math.cos(a)
+        }
+        res.send('hello user!<br> from host Canary');
     });
   } // end of flag checking
 
