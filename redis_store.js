@@ -8,7 +8,7 @@ var client = redis.createClient(6379, '127.0.0.1', {});
 
 client.hmset('Prod', {
         '/': 'True',
-        '/about': 'False'
+        '/about': 'True'
 });
 
 client.hmset('Canary', {
