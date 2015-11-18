@@ -100,11 +100,7 @@ client.hmget(node, '/about', function(err,value){
 }); // end of redis check function 
 
 app.get('/contact', function(req, res){
-  var a = 2000
-        while(1)
-        { 
-          a = Math.sin(a) * Math.cos(a)
-        }
+  
   res.render('contact', {
     title: 'Contact'
   });
