@@ -5,7 +5,7 @@ var httpProxy = require('http-proxy');
 var express = require('express')
 var app = express();
 var redis = require('redis');
-var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {});
+var client = redis.createClient(6379, '127.0.0.1' , {});
 
 
 ports = ['3000','3001'];
@@ -16,8 +16,8 @@ client.del('hosts')
 
 for(i in ports)
 {
-    console.log(process.env.REDIS_PORT_6379_TCP_ADDR+':'+ports[i])
-    client.lpush(['hosts',process.env.REDIS_PORT_6379_TCP_ADDR+':'+ports[i]],function(err, value) {
+    console.log('http://127.0.0.1:'+ports[i])
+    client.lpush(['hosts','http://127.0.0.1:'+ports[i]],function(err, value) {
         console.log("VALUE : ",value)
     })
 }
@@ -107,7 +107,7 @@ setInterval(function()
                          });
                        	alert_flag = 1
                           client.del('hosts')
-                        client.lpush(['hosts',process.env.REDIS_PORT_6379_TCP_ADDR+':3000'],function(err, value) {})
+                        client.lpush(['hosts','http://127.0.0.1:3000'],function(err, value) {})
                  
                  }
         }
