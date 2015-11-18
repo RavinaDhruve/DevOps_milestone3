@@ -73,7 +73,7 @@ client.hmget(node, '/', function(err,value){
         res.write(message);
         res.end();
         */
-        res.send('hello user!<br> from host : '+req.client.server._connectionKey.slice(7,11))
+        res.send('hello user!<br> from host Canary: '+req.client.server._connectionKey.slice(7,11))
     });
   } // end of flag checking
 
