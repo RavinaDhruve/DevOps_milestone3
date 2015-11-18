@@ -2,7 +2,8 @@ var exec = require('child_process').exec;
 var nodemailer = require('nodemailer');
 var io = require('socket.io-client');
 
-var alert_flag = 0;
+var alert_flag_prod = 0;
+var alert_flag_canary = 0;
 
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -30,7 +31,7 @@ setInterval(function()
                     html: '<b>Check the release ✔</b>' // html body
                 };
 
-                if(alert_flag == 0)
+                if(alert_flag_prod == 0)
                  {
                          console.log("SEND")
                          transporter.sendMail(mailOptions, function(error, info){
@@ -39,7 +40,7 @@ setInterval(function()
                          }
                          console.log('Message sent: ' + info.response);
                          });
-                       	alert_flag = 1
+                       	alert_flag_prod = 1
                  }
         }
 
@@ -56,6 +57,7 @@ setInterval(function()
       var stats = out.split('\n');
         var cpuAverage = parseInt(stats[0]);
         var memoryLoad = parseInt(stats[1]);
+        console.log(memoryLoad)
         var name = 'canary';
         if(memoryLoad>1)
         {
@@ -66,7 +68,7 @@ setInterval(function()
                  text: 'CPU overload!', // plaintext body
                  html: '<b>Check the release ✔</b>' // html body
                 };
-                if(alert_flag == 0)
+                if(alert_flag_canary == 0)
                  {
                          console.log("SEND for canary")
                          transporter.sendMail(mailOptions, function(error, info){
@@ -75,7 +77,7 @@ setInterval(function()
                          }
                          console.log('Message sent: ' + info.response);
                          });
-                       	alert_flag = 1
+                       	alert_flag_canary = 1
                         var socket = io.connect('http://127.0.0.1:4000');
                          socket.on('connect', function () { 
                               console.log("socket connected"); 
