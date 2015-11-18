@@ -69,9 +69,11 @@ client.hmget(node, '/', function(err,value){
   if(flag === 'True') {
 
     app.get('/',function(req, res) { 
-      res.writeHead(200, {'content-type':'text/html'});
+      /*res.writeHead(200, {'content-type':'text/html'});
         res.write(message);
         res.end();
+        */
+        res.send('hello user!<br> from host : '+req.client.server._connectionKey.slice(7,11))
     });
   } // end of flag checking
 
