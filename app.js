@@ -30,7 +30,7 @@ else
   var port_num = 5001
 
 app.configure(function(){
-  app.set('port', process.env.PORT || port_num);
+  app.set('port', process.env.PORT || 5001);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
