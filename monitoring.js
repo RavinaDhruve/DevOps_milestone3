@@ -7,8 +7,8 @@ var alert_flag = 0;
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: process.argv[3],
-        pass: process.argv[4]
+        user: process.argv[2],
+        pass: process.argv[3]
     }
 });
 
@@ -57,10 +57,10 @@ setInterval(function()
         var cpuAverage = parseInt(stats[0]);
         var memoryLoad = parseInt(stats[1]);
         var name = 'canary';
-        if(memoryLoad>2)
+        if(memoryLoad>1)
         {
                 var mailOptions = {
-                    from: process.argv[3], // sender address
+                    from: process.argv[2], // sender address
                     to: 'rsmandao@ncsu.edu', // list of receivers
                          subject: 'Alert from Canary', // Subject line
                  text: 'CPU overload!', // plaintext body
