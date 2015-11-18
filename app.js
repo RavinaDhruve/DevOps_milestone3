@@ -24,7 +24,7 @@ var alert_flag = 0
 
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 5000);
+  app.set('port', process.env.PORT || process.argv[3]);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
