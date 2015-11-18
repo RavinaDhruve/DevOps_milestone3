@@ -12,7 +12,7 @@ client.hmset('Prod', {
 });
 
 client.hmset('Canary', {
-        '/': 'False',
+        '/': 'True',
         '/about': 'True'
 });
 
