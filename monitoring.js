@@ -1,48 +1,10 @@
 var exec = require('child_process').exec;
 var nodemailer = require('nodemailer');
-var http      = require('http');
-var httpProxy = require('http-proxy');
-var express = require('express')
-var app = express();
-var redis = require('redis');
-var client = redis.createClient(6379, '127.0.0.1' , {});
-
-
-ports = ['3000','3001'];
-client.del('hosts')
-
-//Canary = 3001
-//Stable = 3000
-
-for(i in ports)
-{
-    console.log('http://127.0.0.1:'+ports[i])
-    client.lpush(['hosts','http://127.0.0.1:'+ports[i]],function(err, value) {
-        console.log("VALUE : ",value)
-    })
-}
-
-var options = {};
-var proxy   = httpProxy.createProxyServer(options);
-
-var server  = http.createServer(function(req, res)
-{
-    client.rpoplpush('hosts','hosts',function(err,value) {
-        proxy.web( req, res, {target: value } );
-        console.log("VALUE rpoplpush: ",value)
-    })
-});
-server.listen(8000);
-
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: process.argv[2],
-        pass: process.argv[3]
-    }
-});
+var io = require('socket.io-client');
 
 var alert_flag = 0;
+
+var socket = io.connect('http://127.0.0.1:4000');
 
 setInterval(function()
 {
@@ -84,10 +46,11 @@ setInterval(function()
 
     exec('docker stats --no-stream prodtest2 | tail -1 | awk \'{print$2;print$8; }\'',function(err, out, code)
     {
-      console.log(out);
       var stats = out.split('\n');
-        console.log(typeof(stats[1]));
-        if(parseInt(stats[1])>2)
+        var cpuAverage = parseInt(stats[0]);
+        var memoryLoad = parseInt(stats[1]);
+        var name = 'canary';
+        if(memoryLoad>2)
         {
                 var mailOptions = {
                     from: process.argv[3], // sender address
@@ -106,9 +69,13 @@ setInterval(function()
                          console.log('Message sent: ' + info.response);
                          });
                        	alert_flag = 1
-                          client.del('hosts')
-                        client.lpush(['hosts','http://127.0.0.1:3000'],function(err, value) {})
-                 
+                         socket.on('connect', function () { 
+                              console.log("socket connected"); 
+                                socket.emit('heartbeat',
+                                {
+                                  Name: name, cpu: cpuAverage, memoryLoad: memoryLoad,
+                                });
+                        });
                  }
         }
 

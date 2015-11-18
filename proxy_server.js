@@ -1,9 +1,9 @@
 var http      = require('http');
 var httpProxy = require('http-proxy');
-var redis = require('redis')
 var express = require('express')
 var app = express()
-var client = redis.createClient(6379, '127.0.0.1', {})
+var redis = require('redis');
+var client = redis.createClient(6379, '127.0.0.1' , {});
 var socket_io = require('socket.io')
 var os = require('os')
 
@@ -15,10 +15,10 @@ client.del('hosts')
 
 for(i in ports)
 {
-	console.log('http://127.0.0.1:'+ports[i])
-	client.lpush(['hosts','http://127.0.0.1:'+ports[i]],function(err, value) {
-		console.log("VALUE : ",value)
-	})
+    console.log('http://127.0.0.1:'+ports[i])
+    client.lpush(['hosts','http://127.0.0.1:'+ports[i]],function(err, value) {
+        console.log("VALUE : ",value)
+    })
 }
 
 var options = {};
@@ -46,12 +46,12 @@ io.sockets.on('connection', function (socket) {
 		console.log('Client connected')
         socket.on('heartbeat',function(data){
               console.log(data);
-              if(data.Name=='canary' && data.cpu > 10)
-              {
+             // if(data.Name=='canary' && data.cpu > 10)
+              //{
               		console.log("NOW STOP Canary")
               		client.del('hosts')
               		client.lpush(['hosts','http://127.0.0.1:3000'],function(err, value) {})
-              }
+              //}
 		});
 	})
 
