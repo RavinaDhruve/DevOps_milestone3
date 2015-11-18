@@ -16,15 +16,22 @@ var express = require('express'),
 var redis = require('redis');
 var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {});
 
-var node = process.argv[2];
+if(process.argv[2])
+  var node = process.argv[2];
+else
+  var node = 'Prod'
 console.log("This is Server:", node);
 
 var app = express();
 var alert_flag = 0
 
+if(process.argv[3])
+  var port_num = process.argv[3]
+else
+  var port_num = 5000
 
 app.configure(function(){
-  app.set('port', process.env.PORT || process.argv[3]);
+  app.set('port', process.env.PORT || port_num);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
