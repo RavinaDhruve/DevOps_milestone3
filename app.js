@@ -71,6 +71,7 @@ client.hmget(node, '/', function(err,value){
     app.get('/',function(req, res) { 
       res.writeHead(200, {'content-type':'text/html'});
         res.write(message);
+        res.end();
     });
   } // end of flag checking
 
