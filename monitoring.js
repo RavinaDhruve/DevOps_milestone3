@@ -4,7 +4,14 @@ var io = require('socket.io-client');
 
 var alert_flag = 0;
 
-var socket = io.connect('http://127.0.0.1:4000');
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: process.argv[3],
+        pass: process.argv[4]
+    }
+});
+
 
 setInterval(function()
 {
@@ -61,7 +68,7 @@ setInterval(function()
                 };
                 if(alert_flag == 0)
                  {
-                         console.log("SEND")
+                         console.log("SEND for canary")
                          transporter.sendMail(mailOptions, function(error, info){
                          if(error){
                                  return console.log(error);
@@ -69,6 +76,7 @@ setInterval(function()
                          console.log('Message sent: ' + info.response);
                          });
                        	alert_flag = 1
+                        var socket = io.connect('http://127.0.0.1:4000');
                          socket.on('connect', function () { 
                               console.log("socket connected"); 
                                 socket.emit('heartbeat',
