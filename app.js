@@ -10,7 +10,8 @@ var express = require('express'),
   io = require('socket.io-client'),
   os = require('os'),
   redis = require('redis'),
-  nodemailer = require('nodemailer');
+  nodemailer = require('nodemailer'),
+  exec = require('child_process').exec;
 
 var redis = require('redis');
 var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {});
