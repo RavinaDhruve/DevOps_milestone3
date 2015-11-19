@@ -24,13 +24,14 @@ console.log("This is Server:", node);
 var app = express();
 var alert_flag = 0
 
+var port_num;
 if(process.argv[3])
-  var port_num = process.argv[3]
+  port_num = process.argv[3];
 else
-  var port_num = 5001
+  port_num = 5001;
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 5001);
+  app.set('port', process.env.PORT || port_num);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
