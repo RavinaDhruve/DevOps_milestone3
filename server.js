@@ -33,7 +33,7 @@ var server  = http.createServer(function(req, res)
 {
     client.rpop('hosts',function(err,value) {
         proxy.web( req, res, {target: value } );
-        client.lpush(['hosts', value], function(err, value){
+        client.lpush(['hosts', value], function(err, value1){
             console.log('pushed value: '+value+' again to queue');
         })
     })
@@ -96,11 +96,11 @@ setInterval(function()
     exec('docker stats --no-stream prodtest2 | tail -1 | awk \'{print$2;print$8; }\'',function(err, out, code)
     {
       var stats = out.split('\n');
-        var cpuAverage = parseInt(stats[0]);
+        var cpuAverage = parseFloat(stats[0]);
         var memoryLoad = parseInt(stats[1]);
         console.log(memoryLoad)
         var name = 'canary';
-        if(memoryLoad>3)
+        if(cpuAverage>0.1)
         {
                 var mailOptions = {
                     from: process.argv[2], // sender address

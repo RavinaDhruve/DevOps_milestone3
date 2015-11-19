@@ -18,7 +18,7 @@ sudo docker run --link redis_ambassador:redis -v `pwd`:/server -p 3000:5000 -td 
 #echo "TEST COMPLETED SUCCESSFULLY."
 sudo docker exec -td prodtest1 sh -c "nodejs server/app.js Prod 5000"
 
-sudo docker run --link redis_ambassador:redis -v `pwd`:/server -p 3001:5001 -td --name prodtest2 m3app:latest
-sudo docker exec -td prodtest2 sh -c "nodejs server/app.js Canary 5001"
+sudo docker run --link redis_ambassador:redis -v `pwd`:/server -p 3001:6001 -td --name prodtest2 m3app:latest
+sudo docker exec -td prodtest2 sh -c "nodejs server/app.js Canary 6001"
 
 echo "DEPLOY COMPLETED SUCCESSFULLY."
