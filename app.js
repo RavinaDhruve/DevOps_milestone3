@@ -28,7 +28,7 @@ var port_num;
 if(process.argv[3])
   port_num = process.argv[3];
 else
-  port_num = 5001;
+  port_num = 6001;
 
 app.configure(function(){
   app.set('port', process.env.PORT || port_num);
