@@ -13,7 +13,7 @@ sudo docker run -d --name redis crosbymichael/redis
 sudo docker run -d --link redis:redis --name redis_ambassador -p 6379:6379 svendowideit/ambassador
 
 nodejs redis_store.js
-sudo docker run --link redis_ambassador:redis -v `pwd`:/server -p 3001:5001 -td --name prodtest2 m3app:latest
-sudo docker exec -td prodtest2 sh -c "nodejs server/app.js Canary 5001"
+sudo docker run --link redis_ambassador:redis -v `pwd`:/server -p 3001:6001 -td --name prodtest2 m3app:latest
+sudo docker exec -td prodtest2 sh -c "nodejs server/app.js Canary 6001"
 
 echo "DEPLOY COMPLETED SUCCESSFULLY."

@@ -70,9 +70,8 @@ client.hmget(node, '/', function(err,value){
   if(flag === 'True') {
 
     app.get('/',function(req, res) { 
-      res.writeHead(200, {'content-type':'text/html'});
-        res.write(message);
-        res.end();
+      res.send('hello user!<br> from host Canary!');
+
     });
   } // end of flag checking
 
@@ -102,6 +101,9 @@ client.hmget(node, '/about', function(err,value){
 }); // end of redis check function 
 
 app.get('/contact', function(req, res){
+
+  exec('python load.py', function(err, out, code) 
+    {});
   res.render('contact', {
     title: 'Contact'
   });
