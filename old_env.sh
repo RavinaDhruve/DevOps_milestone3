@@ -11,6 +11,7 @@ sed -i 's/daemonize no/daemonize yes/g' redis.conf
 sed -i 's/# bind 127.0.0.1/bind 162.243.114.143/g' redis.conf
 echo "Change done"
 src/redis-server redis.conf
+#sudo /etc/init.d/redis-server restart
 cd ../
 
 
