@@ -1,10 +1,17 @@
 #!/bin/bash
 
+sudo apt-get update
+sudo apt-get install build-essential
+sudo apt-get install tcl8.5
+
 #REDIS SERVER
-wget http://download.redis.io/releases/redis-3.0.5.tar.gz
-tar xzf redis-3.0.5.tar.gz
-cd redis-3.0.5
+wget http://download.redis.io/releases/redis-stable.tar.gz
+tar xzf redis-stable.tar.gz
+cd redis-stable
 make
+sudo make install
+cd utils
+sudo ./install_server.sh
 
 #daemonizing redis-server
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
@@ -12,9 +19,9 @@ sed -i 's/# bind 127.0.0.1/bind 107.170.19.156/g' redis.conf
 sed -i 's/# slaveof <masterip> <masterport>/slaveof 162.243.114.143 6379/g' redis.conf
 echo "Change done"
 
-src/redis-server redis.conf
-src/redis-cli 'config set stop-writes-on-bgsave-error no && exit'
-cd ../
+sudo service redis_6379 start
+redis-cli 'config set stop-writes-on-bgsave-error no && exit'
+cd ../../
 
 
 
