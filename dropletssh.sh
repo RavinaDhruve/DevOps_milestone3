@@ -7,7 +7,7 @@ interact
 
 
 sudo docker run -d --name redis1 crosbymichael/redis
-sudo docker run -td --name prodtest8 m3app:latest
+sudo docker run -td --name prodtest8 ubuntu:trusty
 
 sudo docker stop $(sudo docker ps -a -f 'name=prod*' -q)
 sudo docker rm $(sudo docker ps -a -f 'name=prod*' -q)
