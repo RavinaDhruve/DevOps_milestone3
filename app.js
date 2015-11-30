@@ -91,7 +91,7 @@ app.get('/contact', function(req, res){
   });
 });
 
-/*
+
 ///////////// WEB ROUTES
 // Sets Key-value pair which expires in sometime
 app.get('/set', function(req, res) {
@@ -118,7 +118,7 @@ app.get('/get', function(req, res) {
   });
 })
 /////////////////////////////////////////////////////////////////
-*/
+
 
 
 http.createServer(app).listen(app.get('port'), function(){
