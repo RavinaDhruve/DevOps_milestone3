@@ -14,8 +14,7 @@ cd ../
 
 
 #WEB SERVER
-sudo npm uninstall -g forever
 sudo npm install -g forever
-forever start app.js Prod 3000
+sudo bash -c 'forever -w start app.js Prod 3000'
 
 echo "DEPLOY COMPLETED SUCCESSFULLY."
