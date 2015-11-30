@@ -10,7 +10,9 @@ make
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
 echo "Change done"
 src/redis-server redis.conf
+./redis-server --port 6379 --slaveof 104.131.197.251 6379
 cd ../
+
 
 
 #WEB SERVER
