@@ -13,8 +13,8 @@ var express = require('express'),
   redis = require('redis'),
   nodemailer = require('nodemailer');
 
-//var redis = require('redis');
-//var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {});
+var redis = require('redis');
+var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {});
 
 if(process.argv[2])
   var node = process.argv[2];
