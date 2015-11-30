@@ -104,7 +104,7 @@ app.get('/set', function(req, res) {
 // Gets the key-value pair
 app.get('/get', function(req, res) {
   // gets the value
-  client.get("Day1", function(err,value){ 
+  client.get("time", function(err,value){ 
     if(value)
     {
       console.log("Value exists:", value);
