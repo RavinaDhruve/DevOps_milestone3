@@ -13,8 +13,8 @@ var express = require('express'),
   redis = require('redis'),
   nodemailer = require('nodemailer');
 
-var redis = require('redis');
-var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {});
+//var redis = require('redis');
+//var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {});
 
 if(process.argv[2])
   var node = process.argv[2];
@@ -91,7 +91,7 @@ app.get('/contact', function(req, res){
   });
 });
 
-
+/*
 ///////////// WEB ROUTES
 // Sets Key-value pair which expires in sometime
 app.get('/set', function(req, res) {
@@ -118,7 +118,7 @@ app.get('/get', function(req, res) {
   });
 })
 /////////////////////////////////////////////////////////////////
-
+*/
 
 
 http.createServer(app).listen(app.get('port'), function(){
