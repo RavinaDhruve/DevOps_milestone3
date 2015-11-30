@@ -64,19 +64,11 @@ else
 
 
 
-client.hmget(node, '/', function(err,value){ 
 
-  var flag = (value.toString());
-  if(flag === 'True') {
-
-    app.get('/',function(req, res) { 
-        res.send('hello user!<br> from host Prod!');
-    });
-  } // end of flag checking
-
-  //console.log("\nFeature Flag off. No service found!");
-  
-}); // end of redis check function
+app.get('/',function(req, res) { 
+    res.send('hello user!<br> from host Prod!');
+});
+   // end of flag checking
 
 app.get('/home',function(req, res) {
   res.render('index', {
@@ -84,26 +76,49 @@ app.get('/home',function(req, res) {
   });
 });
 
-client.hmget(node, '/about', function(err,value){ 
 
-  var flag = (value.toString());
-  if(flag === 'True') {
-    app.get('/about', function(req, res){
-      res.render('about', {
-        title: 'About'
-      });
-    });
-  } // end of flag checking
+app.get('/about', function(req, res){
+  res.render('about', {
+    title: 'About'
+  });
+});
+   // end of flag checking
 
-  //console.log("\nFeature Flag off. No service found!");
-  
-}); // end of redis check function 
 
 app.get('/contact', function(req, res){
   res.render('contact', {
     title: 'Contact'
   });
 });
+
+
+///////////// WEB ROUTES
+// Sets Key-value pair which expires in sometime
+app.get('/set', function(req, res) {
+  // set key-value pair which expires in 10 seconds
+  client.set("Day", "Good morning!");
+  res.send("Value set.");
+})
+
+// Gets the key-value pair
+app.get('/get', function(req, res) {
+  // gets the value
+  client.get("Day", function(err,value){ 
+    if(value)
+    {
+      console.log("Value exists:", value);
+      res.send("Value exists : "+value);
+    }
+      
+    else
+    {
+      res.send("Value doesn't exist.");
+    } 
+    res.end();
+  });
+})
+/////////////////////////////////////////////////////////////////
+
 
 
 http.createServer(app).listen(app.get('port'), function(){
