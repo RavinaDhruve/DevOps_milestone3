@@ -19,8 +19,7 @@ cd ../
 sudo /etc/init.d/redis_6379 start
 
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
-sed -i 's/# bind 127.0.0.1/bind 107.170.162.35/g' redis.conf
-sed -i 's/# slaveof <masterip> <masterport>/slaveof 162.243.114.143 6379/g' redis.conf
+sed -i 's/# slaveof <masterip> <masterport>/slaveof 107.170.51.11 6379/g' redis.conf
 echo "Change done"
 
 sudo /etc/init.d/redis_6379 restart
