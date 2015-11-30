@@ -6,6 +6,7 @@ cd redis-3.0.5
 make
 src/redis-server &
 
+cd ../
 node app.js Prod 3000 &
 
 echo "DEPLOY COMPLETED SUCCESSFULLY."
