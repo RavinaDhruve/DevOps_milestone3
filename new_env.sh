@@ -12,6 +12,7 @@ make
 sudo make install
 cd utils
 sudo ./install_server.sh
+cd ../
 
 #daemonizing redis-server
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
@@ -21,7 +22,7 @@ echo "Change done"
 
 sudo service redis_6379 start
 redis-cli 'config set stop-writes-on-bgsave-error no && exit'
-cd ../../
+cd ../
 
 
 
