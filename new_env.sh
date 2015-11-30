@@ -8,9 +8,11 @@ make
 
 #daemonizing redis-server
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
+sed -i 's/bind 127.0.0.1/bind 107.170.19.156/g' redis.conf
 echo "Change done"
+
 src/redis-server redis.conf
-./redis-server --port 6379 --slaveof 104.131.197.251 6379
+./redis-server --port 6379 --slaveof 162.243.114.143 6379
 cd ../
 
 
