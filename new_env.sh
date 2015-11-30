@@ -16,7 +16,8 @@ cd ../
 
 
 #WEB SERVER
+npm install
 sudo npm install -g forever
-sudo bash -c 'forever -w start app.js Prod 3001'
+sudo bash -c 'forever -w start app.js Prod 6000'
 
 echo "DEPLOY TO MIGRATED SITE COMPLETED SUCCESSFULLY."
