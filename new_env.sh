@@ -15,13 +15,16 @@ sudo ./install_server.sh
 cd ../
 
 #daemonizing redis-server
+#first start
+sudo /etc/init.d/redis_6379 start
+
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
 sed -i 's/# bind 127.0.0.1/bind 107.170.162.35/g' redis.conf
 sed -i 's/# slaveof <masterip> <masterport>/slaveof 162.243.114.143 6379/g' redis.conf
 echo "Change done"
 
-sudo service redis_6379 start
-redis-cli 'config set stop-writes-on-bgsave-error no && exit'
+sudo /etc/init.d/redis_6379 restart
+src/redis-cli 'config set stop-writes-on-bgsave-error no && exit'
 cd ../
 
 
