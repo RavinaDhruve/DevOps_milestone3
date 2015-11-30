@@ -10,6 +10,7 @@ make
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
 echo "Change done"
 src/redis-server redis.conf
+cd ../
 
 
 
