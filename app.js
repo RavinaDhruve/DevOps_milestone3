@@ -96,7 +96,7 @@ app.get('/contact', function(req, res){
 // Sets Key-value pair which expires in sometime
 app.get('/set', function(req, res) {
   // set key-value pair which expires in 10 seconds
-  client.set("Day", "Good morning!");
+  client.set("Day", "Good evening!");
   res.send("Value set.");
 })
 
