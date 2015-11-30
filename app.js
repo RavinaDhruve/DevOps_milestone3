@@ -94,16 +94,17 @@ app.get('/contact', function(req, res){
 
 ///////////// WEB ROUTES
 // Sets Key-value pair which expires in sometime
+/*
 app.get('/set', function(req, res) {
   // set key-value pair which expires in 10 seconds
   client.set("Day", "Good morning!");
   res.send("Value set.");
-})
+})*/
 
 // Gets the key-value pair
 app.get('/get', function(req, res) {
   // gets the value
-  client.get("Day", function(err,value){ 
+  client.get("Day1", function(err,value){ 
     if(value)
     {
       console.log("Value exists:", value);
