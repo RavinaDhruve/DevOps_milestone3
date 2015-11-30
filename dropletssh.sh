@@ -1,4 +1,5 @@
-#!/usr/bin/expect
+#!/usr/bin/expect -f
+
 sudo apt-get install expect -y
 
 
