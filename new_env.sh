@@ -8,11 +8,12 @@ make
 
 #daemonizing redis-server
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
+src/redis-server redis.conf
+
 sed -i 's/# bind 127.0.0.1/bind 107.170.19.156/g' redis.conf
 sed -i 's/# slaveof <masterip> <masterport>/slaveof 162.243.114.143 6379/g' redis.conf
 echo "Change done"
-
-src/redis-server redis.conf
+sudo /etc/init.d/redis-server restart
 cd ../
 
 
