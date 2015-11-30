@@ -104,6 +104,6 @@ ___
 + server.js - the node.js file which starts proxy server and monitoring server code.
 
 
-Try Droplet 3
+Try Droplet 2
 
 
