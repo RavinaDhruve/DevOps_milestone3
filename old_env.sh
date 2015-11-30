@@ -14,8 +14,6 @@ src/redis-server redis.conf
 
 
 #WEB SERVER
-cd ../
-sudo npm install forever -g
-forever start app.js Prod 3000
+
 
 echo "DEPLOY COMPLETED SUCCESSFULLY."
