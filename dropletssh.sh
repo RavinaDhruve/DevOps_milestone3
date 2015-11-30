@@ -1,4 +1,9 @@
 #!/usr/bin/expect
+sudo apt-get install expect
+sudo apt-get install spawn
+sudo apt-get install send
+sudo apt-get install interact
+
 
 spawn ssh root@107.170.19.156
 expect "password"
