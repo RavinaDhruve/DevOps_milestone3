@@ -11,7 +11,7 @@ sudo docker rm $(sudo docker ps -a -f 'name=redis*' -q)
 
 
 sudo docker run -d --name redis crosbymichael/redis
-redis-cli -h 107.170.19.156 -p 6379 slaveof 104.131.197.251 6379
+redis -h 107.170.19.156 -p 6379 slaveof 104.131.197.251 6379
 
 sudo docker run -d --link redis:redis --name redis_ambassador -p 6379:6379 svendowideit/ambassador
 
