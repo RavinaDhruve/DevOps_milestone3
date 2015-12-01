@@ -20,10 +20,9 @@ sudo /etc/init.d/redis_6379 start
 
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
 echo "Change done"
-sudo service redis_6379 start
 
 sudo /etc/init.d/redis_6379 restart
-src/redis-cli 'config set stop-writes-on-bgsave-error no && exit'
+#src/redis-cli 'config set stop-writes-on-bgsave-error no && exit'
 cd ../
 
 
