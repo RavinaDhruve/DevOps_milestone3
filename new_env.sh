@@ -31,6 +31,7 @@ cd ../
 #WEB SERVER
 npm install
 sudo npm install -g forever
+forever stopall
 sudo bash -c 'forever -w start app.js Slave 6700'
 
 echo "DEPLOY TO MIGRATED SITE COMPLETED SUCCESSFULLY."
