@@ -29,6 +29,6 @@ cd ../
 #WEB SERVER
 npm install
 sudo npm install -g forever
-sudo bash -c 'forever -w start app.js Prod 3000'
+sudo bash -c 'forever -w start app.js Master 3000'
 
 echo "DEPLOY COMPLETED SUCCESSFULLY."
