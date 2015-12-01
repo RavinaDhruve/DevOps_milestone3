@@ -16,13 +16,13 @@ cd ../
 
 #daemonizing redis-server
 #first start
-sudo /etc/init.d/redis_6379 start
+sudo service redis-server start
 
 sed -i 's/daemonize no/daemonize yes/g' redis.conf
 sed -i 's/# slaveof <masterip> <masterport>/slaveof 107.170.51.11 6379/g' redis.conf
 echo "Change done"
 
-sudo /etc/init.d/redis_6379 restart
+sudo service redis-server restart
 #src/redis-cli 'config set stop-writes-on-bgsave-error no && exit'
 cd ../
 
@@ -31,7 +31,7 @@ cd ../
 #WEB SERVER
 npm install
 sudo npm install -g forever
-forever stopall
+sudo forever stop app.js
 sudo bash -c 'forever -w start app.js Slave 6700'
 
 echo "DEPLOY TO MIGRATED SITE COMPLETED SUCCESSFULLY."
