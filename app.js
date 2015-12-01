@@ -19,7 +19,7 @@ var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {})
 if(process.argv[2])
   var node = process.argv[2];
 else
-  var node = 'Prod'
+  var node = 'Slave'
 console.log("This is Server:", node);
 
 var app = express();
@@ -108,7 +108,7 @@ app.get('/get', function(req, res) {
     if(value)
     {
       console.log("Value exists:", value);
-      res.send("Value exists : "+value);
+      res.send("Value exists at Slave : "+value);
     }
       
     else
