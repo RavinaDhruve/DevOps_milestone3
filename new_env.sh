@@ -23,7 +23,7 @@ sed -i 's/# slaveof <masterip> <masterport>/slaveof 107.170.51.11 6379/g' redis.
 echo "Change done"
 
 sudo /etc/init.d/redis_6379 restart
-src/redis-cli 'config set stop-writes-on-bgsave-error no && exit'
+#src/redis-cli 'config set stop-writes-on-bgsave-error no && exit'
 cd ../
 
 
