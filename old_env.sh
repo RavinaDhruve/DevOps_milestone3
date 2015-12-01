@@ -1,6 +1,10 @@
 #!/bin/bash
 
 sudo apt-get update
+sudo apt-get install npm
+sudo npm install nodejs
+sudo apt-get install nodejs-legacy
+sudo apt-get install git
 sudo apt-get install build-essential
 sudo apt-get install tcl8.5
 
