@@ -28,7 +28,7 @@ var alert_flag = 0
 if(process.argv[3])
   var port_num = process.argv[3]
 else
-  var port_num = 5000
+  var port_num = 3000
 
 app.configure(function(){
   app.set('port', process.env.PORT || port_num);
@@ -52,21 +52,11 @@ app.configure('development', function(){
     title: 'Home'
   })
 });*/
-if(app.get('port') == '5000')
-  var message = 'Production! (Stable)'
-else
-  var message = 'Canary'
-
-if(app.get('port') == '5000')
-  name = 'production'
-else
-  name = 'canary'
-
 
 
 
 app.get('/',function(req, res) { 
-    res.send('hello user!<br> from host Prod!');
+    res.send('Hello user!<br> from host Master!');
 });
    // end of flag checking
 
@@ -106,7 +96,7 @@ app.get('/get', function(req, res) {
   client.get("time", function(err,value){ 
     if(value)
     {
-      console.log("Value exists:", value);
+      console.log("Value exists at Master:", value);
       res.send("Value exists at Master: "+value);
     }
       
