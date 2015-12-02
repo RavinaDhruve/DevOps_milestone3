@@ -100,7 +100,7 @@ app.get('/set', function(req, res) {
   client.set("key hits", hits)
   console.log("hits : ",hits)
   res.send("Value set at Slave.");
-})
+});
 
 // Gets the key-value pair
 app.get('/get', function(req, res) {
