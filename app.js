@@ -86,15 +86,15 @@ app.get('/contact', function(req, res){
 
 var hits;
 if(client.exists("key hits"))
-  {
-    client.get("key hits", function(err,value){ 
+{
+  client.get("key hits", function(err,value){ 
     hits = value;
   });
-  }
+}
 else
-  {
-    hits = 0;
-  }
+{
+  hits = 0;
+}
 
 
 // Sets Key-value pair which expires in sometime
