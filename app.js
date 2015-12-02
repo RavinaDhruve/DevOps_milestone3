@@ -103,7 +103,7 @@ app.get('/set', function(req, res) {
 
   hits = hits + 1;
   client.set("key hits", hits)
-  res.send("Value set at Master.");
+  res.send("Value set at Slave.");
 });
 
 // Gets the key-value pair
@@ -112,13 +112,13 @@ app.get('/get', function(req, res) {
   client.get("key hits", function(err,value){ 
     if(value)
     {
-      console.log("Value exists at Master:", value);
-      res.send("Value exists at Master: "+value);
+      console.log("Value exists at Slave:", value);
+      res.send("Value exists at Slave: "+value);
     }
       
     else
     {
-      res.send("Value doesn't exist at Master.");
+      res.send("Value doesn't exist at Slave.");
     } 
     res.end();
   });
