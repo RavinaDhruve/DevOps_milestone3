@@ -56,7 +56,7 @@ app.configure('development', function(){
 
 
 app.get('/',function(req, res) { 
-    res.send('Hello user!<br> from host Master Server!');
+    res.send('Hello user!<br> from host Slave Server!');
 });
    // end of flag checking
 
@@ -129,19 +129,19 @@ app.get('/get', function(req, res) {
 app.get('/setTime', function(req, res) {
   // set key-value pair which expires in 10 seconds
   client.set("Time", "10:00 am")
-  res.send("Value set at Master.");
+  res.send("Value set at Slave.");
 })
 
 app.get('/setDay', function(req, res) {
   // set key-value pair which expires in 10 seconds
   client.set("Day", "Thursday")
-  res.send("Value set at Master.");
+  res.send("Value set at Slave.");
 })
 
 app.get('/setMonth', function(req, res) {
   // set key-value pair which expires in 10 seconds
   client.set("Month", "December")
-  res.send("Value set at Master.");
+  res.send("Value set at Slave.");
 })
 
 app.get('/getTime', function(req, res) {
@@ -149,13 +149,13 @@ app.get('/getTime', function(req, res) {
   client.get("Time", function(err,value){ 
     if(value)
     {
-      console.log("Value exists at Master:", value);
-      res.send("Value exists at Master: "+value)
+      console.log("Value exists at Slave:", value);
+      res.send("Value exists at Slave: "+value)
     }
       
     else
     {
-      res.send("Value doesn't exist at Master.")
+      res.send("Value doesn't exist at Slave.")
     } 
     res.end();
   });
@@ -166,13 +166,13 @@ app.get('/getDay', function(req, res) {
   client.get("Day", function(err,value){ 
     if(value)
     {
-      console.log("Value exists at Master:", value);
-      res.send("Value exists at Master: "+value)
+      console.log("Value exists at Slave:", value);
+      res.send("Value exists at Slave: "+value)
     }
       
     else
     {
-      res.send("Value doesn't exist at Master.")
+      res.send("Value doesn't exist at Slave.")
     } 
     res.end();
   });
@@ -183,13 +183,13 @@ app.get('/getMonth', function(req, res) {
   client.get("Month", function(err,value){ 
     if(value)
     {
-      console.log("Value exists at Master:", value);
-      res.send("Value exists at Master: "+value)
+      console.log("Value exists at Slave:", value);
+      res.send("Value exists at Slave: "+value)
     }
       
     else
     {
-      res.send("Value doesn't exist at Master.")
+      res.send("Value doesn't exist at Slave.")
     } 
     res.end();
   });
