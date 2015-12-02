@@ -85,7 +85,13 @@ app.get('/contact', function(req, res){
 ///////////// WEB ROUTES
 
 var hits;
-if(client.exists("key hits"))
+
+
+// Sets Key-value pair which expires in sometime
+app.get('/set', function(req, res) {
+  // set key-value pair which expires in 10 seconds
+
+  if(client.exists("key hits"))
   {
     client.get("key hits", function(err,value){ 
     hits = value;
@@ -96,12 +102,7 @@ if(client.exists("key hits"))
     hits = 0;
   }
 
-
-// Sets Key-value pair which expires in sometime
-app.get('/set', function(req, res) {
-  // set key-value pair which expires in 10 seconds
-
-  hits++;
+  hits = hits + 1;
   client.set("key hits", hits)
   console.log("hits : ",hits)
   res.send("Value set at Master.");
