@@ -86,17 +86,20 @@ app.get('/contact', function(req, res){
 
 var hits = 0;
 
-if(client.exists("key hits"))
-{
-  client.get("key hits", function(err,value){ 
-  hits = value;
-});
-}
+
 
 // Sets Key-value pair which expires in sometime
 app.get('/set', function(req, res) {
   // set key-value pair which expires in 10 seconds
-  client.set("key hits", hits+1);
+  if(client.exists("key hits"))
+  {
+    client.get("key hits", function(err,value){ 
+    hits = value;
+  });
+  }
+
+  hits = hits+1;
+  client.set("key hits", hits);
   res.send("Value set at Master.");
 })
 
