@@ -19,7 +19,7 @@ sudo ./install_server.sh
 cd ../
 
 #sentinel-conf
-sed -i '1s/^/daemonize yes /' sentinel.conf
+sed -i '2s/^/daemonize yes /' sentinel.conf
 sed -i 's/sentinel monitor mymaster 127.0.0.1 6379 2/sentinel monitor masterServer 107.170.51.11 6379 1/g' sentinel.conf
 sed -i 's/sentinel down-after-milliseconds mymaster 30000/sentinel down-after-milliseconds masterServer 5000/g' sentinel.conf
 sed -i 's/sentinel parallel-syncs mymaster 1/sentinel parallel-syncs masterServer 1/g' sentinel.conf
