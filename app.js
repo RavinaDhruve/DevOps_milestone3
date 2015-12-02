@@ -98,7 +98,7 @@ app.get('/set', function(req, res) {
   });
   }
 
-  hits = hits+1;
+  hits = hits++;
   client.set("key hits", hits);
   res.send("Value set at Master.");
 })
