@@ -82,27 +82,36 @@ app.get('/contact', function(req, res){
 
 
 ///////////// WEB ROUTES
+
+var hits = 0;
+
+if(client.exists("key hits"))
+{
+  client.get("key hits", function(err,value){ 
+  hits = value;
+}
+
+
 // Sets Key-value pair which expires in sometime
-/*
 app.get('/set', function(req, res) {
   // set key-value pair which expires in 10 seconds
-  client.set("Day", "Good morning!");
-  res.send("Value set.");
-})*/
+  client.set("key hits", hits+1);
+  res.send("Value set at Slave.");
+})
 
 // Gets the key-value pair
 app.get('/get', function(req, res) {
   // gets the value
-  client.get("time", function(err,value){ 
+  client.get("key hits", function(err,value){ 
     if(value)
     {
       console.log("Value exists at Slave:", value);
-      res.send("Value exists at Slave : "+value);
+      res.send("Value exists at Slave: "+value);
     }
       
     else
     {
-      res.send("Value doesn't exist.");
+      res.send("Value doesn't exist at Slave.");
     } 
     res.end();
   });
