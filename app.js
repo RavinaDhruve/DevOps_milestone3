@@ -11,7 +11,8 @@ var express = require('express'),
   io = require('socket.io-client'),
   os = require('os'),
   redis = require('redis'),
-  nodemailer = require('nodemailer');
+  nodemailer = require('nodemailer'),
+  math = require('mathjs');
 
 var redis = require('redis');
 var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {});
@@ -56,7 +57,7 @@ app.configure('development', function(){
 
 
 app.get('/',function(req, res) { 
-    res.send('Hello user!<br> from host Master!');
+    res.send('Hello user!<br> from host Master Server!');
 });
    // end of flag checking
 
@@ -83,17 +84,20 @@ app.get('/contact', function(req, res){
 
 
 ///////////// WEB ROUTES
+
+var hits = 0;
+
 // Sets Key-value pair which expires in sometime
 app.get('/set', function(req, res) {
   // set key-value pair which expires in 10 seconds
-  client.set("time", "Good evening!");
-  res.send("Value set.");
+  client.set("key hits", hits+1);
+  res.send("Value set at Master.");
 })
 
 // Gets the key-value pair
 app.get('/get', function(req, res) {
   // gets the value
-  client.get("time", function(err,value){ 
+  client.get("key hits", function(err,value){ 
     if(value)
     {
       console.log("Value exists at Master:", value);
@@ -102,7 +106,7 @@ app.get('/get', function(req, res) {
       
     else
     {
-      res.send("Value doesn't exist.");
+      res.send("Value doesn't exist at Master.");
     } 
     res.end();
   });
