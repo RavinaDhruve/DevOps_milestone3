@@ -19,7 +19,7 @@ var client = redis.createClient(6379, process.env.REDIS_PORT_6379_TCP_ADDR , {})
 if(process.argv[2])
   var node = process.argv[2];
 else
-  var node = 'Slave'
+  var node = 'Master'
 console.log("This is Server:", node);
 
 var app = express();
@@ -28,7 +28,7 @@ var alert_flag = 0
 if(process.argv[3])
   var port_num = process.argv[3]
 else
-  var port_num = 6700
+  var port_num = 3000
 
 app.configure(function(){
   app.set('port', process.env.PORT || port_num);
@@ -54,8 +54,9 @@ app.configure('development', function(){
 });*/
 
 
+
 app.get('/',function(req, res) { 
-    res.send('Hello user!<br> from host Slave!');
+    res.send('Hello user!<br> from host Master Server!');
 });
    // end of flag checking
 
@@ -83,23 +84,26 @@ app.get('/contact', function(req, res){
 
 ///////////// WEB ROUTES
 
-var hits = 0;
+var hits;
 if(client.exists("key hits"))
-  {
-    client.get("key hits", function(err,value){ 
+{
+  client.get("key hits", function(err,value){ 
     hits = value;
   });
-  }
+}
+else
+{
+  hits = 0;
+}
 
 
 // Sets Key-value pair which expires in sometime
 app.get('/set', function(req, res) {
   // set key-value pair which expires in 10 seconds
 
-  hits++;
+  hits = hits + 1;
   client.set("key hits", hits)
-  console.log("hits : ",hits)
-  res.send("Value set at Slave.");
+  res.send("Value set at Master.");
 });
 
 // Gets the key-value pair
@@ -108,13 +112,13 @@ app.get('/get', function(req, res) {
   client.get("key hits", function(err,value){ 
     if(value)
     {
-      console.log("Value exists at Slave:", value);
-      res.send("Value exists at Slave: "+value);
+      console.log("Value exists at Master:", value);
+      res.send("Value exists at Master: "+value);
     }
       
     else
     {
-      res.send("Value doesn't exist at Slave");
+      res.send("Value doesn't exist at Master.");
     } 
     res.end();
   });
