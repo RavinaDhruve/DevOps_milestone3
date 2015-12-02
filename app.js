@@ -102,9 +102,8 @@ app.get('/set', function(req, res) {
   // set key-value pair which expires in 10 seconds
 
   hits = hits + 1;
-  client.set("key hits", hits,function(req,res) {
-    res.send("Value set at Master.");
-  })
+  client.set("key hits", hits)
+  res.send("Value set at Master.");
 })
 
 // Gets the key-value pair
