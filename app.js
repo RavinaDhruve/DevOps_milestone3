@@ -84,19 +84,21 @@ app.get('/contact', function(req, res){
 ///////////// WEB ROUTES
 
 var hits = 0;
-
 if(client.exists("key hits"))
-{
-  client.get("key hits", function(err,value){ 
-  hits = value;
-});
-}
+  {
+    client.get("key hits", function(err,value){ 
+    hits = value;
+  });
+  }
 
 
 // Sets Key-value pair which expires in sometime
 app.get('/set', function(req, res) {
   // set key-value pair which expires in 10 seconds
-  client.set("key hits", hits+1);
+
+  hits++;
+  client.set("key hits", hits)
+  console.log("hits : ",hits)
   res.send("Value set at Slave.");
 })
 
@@ -112,7 +114,7 @@ app.get('/get', function(req, res) {
       
     else
     {
-      res.send("Value doesn't exist at Slave.");
+      res.send("Value doesn't exist at Slave");
     } 
     res.end();
   });
