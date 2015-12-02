@@ -89,6 +89,7 @@ if(client.exists("key hits"))
 {
   client.get("key hits", function(err,value){ 
   hits = value;
+});
 }
 
 
