@@ -128,25 +128,25 @@ app.get('/get', function(req, res) {
 ///////////////////////////WEB ROUTES
 app.get('/setTime', function(req, res) {
   // set key-value pair which expires in 10 seconds
-  client.set("Time_1", "10:00 am")
+  client.set("Time_2", "10:00 am")
   res.send("Value set at Master.");
 })
 
 app.get('/setDay', function(req, res) {
   // set key-value pair which expires in 10 seconds
-  client.set("Day_1", "Thursday")
+  client.set("Day_2", "Thursday")
   res.send("Value set at Master.");
 })
 
 app.get('/setMonth', function(req, res) {
   // set key-value pair which expires in 10 seconds
-  client.set("Month_1", "December")
+  client.set("Month_2", "December")
   res.send("Value set at Master.");
 })
 
 app.get('/getTime', function(req, res) {
   // gets the value
-  client.get("Time_1", function(err,value){ 
+  client.get("Time_2", function(err,value){ 
     if(value)
     {
       console.log("Value exists at Master:", value);
@@ -163,7 +163,7 @@ app.get('/getTime', function(req, res) {
 
 app.get('/getDay', function(req, res) {
   // gets the value
-  client.get("Day_1", function(err,value){ 
+  client.get("Day_2", function(err,value){ 
     if(value)
     {
       console.log("Value exists at Master:", value);
@@ -180,7 +180,7 @@ app.get('/getDay', function(req, res) {
 
 app.get('/getMonth', function(req, res) {
   // gets the value
-  client.get("Month_1", function(err,value){ 
+  client.get("Month_2", function(err,value){ 
     if(value)
     {
       console.log("Value exists at Master:", value);
