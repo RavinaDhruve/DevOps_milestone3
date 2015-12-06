@@ -32,12 +32,13 @@ and services on it and will be starting those services in the most up-to-date st
 migrating the Redis server and Web servers from Site A to Site B.
 
 Automatic configuration of site environments:
-    The two jobs will be instantiated from the two branches in the repo as: M4test (for Stable Site A)
-    and Migration (for Migration_monkey Site B).
-    
-    The following commands are written in the jenkins job configuration for the Stable Site A job:
 
-    ```
+The two jobs will be instantiated from the two branches in the repo as: M4test (for Stable Site A)
+and Migration (for Migration_monkey Site B).
+    
+The following commands are written in the jenkins job configuration for the Stable Site A job:
+
+```
     sudo npm install
     echo "BUILD COMPLETED SUCCESSFULLY."
 
@@ -70,11 +71,11 @@ Automatic configuration of site environments:
     fi
 
     sudo service haproxy start
-    ```
+```
     
-    The following commands are written in the jenkins job configuration for the Migration_monkey Site B job:
+The following commands are written in the jenkins job configuration for the Migration_monkey Site B job:
 
-    ```
+```
     sudo npm install
     echo "BUILD COMPLETED SUCCESSFULLY."
 
@@ -84,7 +85,7 @@ Automatic configuration of site environments:
     #DEPLOY to new site
     sudo apt-get install sshpass
     sshpass -p 'redis_slave' ssh -o StrictHostKeyChecking=no root@<Droplet3 IP> 'rm -rf DevOps_milestone3 && git clone -b Migration https://github.com/RavinaDhruve/DevOps_milestone3.git && cd DevOps_milestone3 && sh new_env.sh'
-    ```
+```
 
 
 ####Migration Approach:
