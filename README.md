@@ -146,7 +146,9 @@ ___
 + app.js - the web server file.
 + haproxy.cfg - configuration file for HAProxy
 + old_env.sh - this file runs automatic configuration and deployment for the Site A Production environment.
+  (Branch M4test)
 + new_env.sh - this file runs automatic configuration and deployment for the Site B Production environment.
+  (Branch Migration)
 + diagram.png and jobs.png - screenshots for README.md
 
 
