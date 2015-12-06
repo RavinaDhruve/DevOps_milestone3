@@ -82,48 +82,6 @@ app.get('/contact', function(req, res){
 });
 
 
-///////////// WEB ROUTES
-
-/*var hits;
-if(client.exists("key hits"))
-{
-  client.get("key hits", function(err,value){ 
-    hits = value;
-  });
-}
-else
-{
-  hits = 0;
-}
-
-
-// Sets Key-value pair which expires in sometime
-app.get('/set', function(req, res) {
-  // set key-value pair which expires in 10 seconds
-
-  hits = hits + 1;
-  client.set("key hits", hits)
-  res.send("Value set at Master.");
-})
-
-// Gets the key-value pair
-app.get('/get', function(req, res) {
-  // gets the value
-  client.get("key hits", function(err,value){ 
-    if(value)
-    {
-      console.log("Value exists at Master:", value);
-      res.send("Value exists at Master: "+value)
-    }
-      
-    else
-    {
-      res.send("Value doesn't exist at Master.")
-    } 
-    //res.end();
-  });
-})*/
-/////////////////////////////////////////////////////////////////
 
 ///////////////////////////WEB ROUTES
 app.get('/setTime', function(req, res) {
