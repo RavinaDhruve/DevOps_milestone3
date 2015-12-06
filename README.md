@@ -31,7 +31,7 @@ On running the Migration_monkey Site B job, we will be configuring a new environ
 and services on it and will be starting those services in the most up-to-date state. Here, we are 
 migrating the Redis server and Web servers from Site A to Site B.
 
-Automatic configuration of site environments:
+**Automatic configuration of site environments:**
 
 The two jobs will be instantiated from the two branches in the repo as: M4test (for Stable Site A)
 and Migration (for Migration_monkey Site B).
@@ -147,6 +147,7 @@ ___
 + haproxy.cfg - configuration file for HAProxy
 + old_env.sh - this file runs automatic configuration and deployment for the Site A Production environment.
 + new_env.sh - this file runs automatic configuration and deployment for the Site B Production environment.
++ diagram.png and jobs.png - screenshots for README.md
 
 
 
