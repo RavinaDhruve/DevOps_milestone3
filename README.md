@@ -3,6 +3,7 @@
 ## PROJECT MILESTONE #4 - SPECIAL MILESTONE - MIGRATION MONKEY
 
 **TEAM:** 
+
 *Kriti Bhandari - kbhanda*
 *Rajashree Mandaogane - rsmandao*
 *Ravina Dhruve - rrdhruve*
@@ -35,6 +36,7 @@ Automatic configuration of site environments:
     and Migration (for Migration_monkey Site B).
     
     The following commands are written in the jenkins job configuration for the Stable Site A job:
+
     ```
     sudo npm install
     echo "BUILD COMPLETED SUCCESSFULLY."
@@ -71,6 +73,7 @@ Automatic configuration of site environments:
     ```
     
     The following commands are written in the jenkins job configuration for the Migration_monkey Site B job:
+
     ```
     sudo npm install
     echo "BUILD COMPLETED SUCCESSFULLY."
@@ -126,9 +129,9 @@ By means of this extension, we are showing continuous and consistent availabilit
 
 Note:
 The deployed app can be accessed by going to http://IP_address_of_HAProxy:9000 in the browser.
+___
 
-
-**SCREENCAST LINK: **
+**SCREENCAST LINK:**
 
 https://www.youtube.com/watch?v=bqIkgmfw8CE
 
